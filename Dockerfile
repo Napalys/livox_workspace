@@ -72,7 +72,9 @@ RUN git clone https://github.com/Livox-SDK/Livox-SDK && cd Livox-SDK && cd build
 
 SHELL ["/bin/bash", "-c"]
 
-RUN source /opt/ros/melodic/setup.sh && git clone https://github.com/Livox-SDK/livox_ros_driver.git ros_driver/src && cd ros_driver && catkin_make && cd devel && source setup.sh && cd ../.. && mkdir -p livox_mapping/src && \
+RUN apt install gdb -y
+
+RUN source /opt/ros/melodic/setup.sh && git clone https://github.com/Livox-SDK/livox_ros_driver.git ros_driver/src && cd ros_driver && catkin_make && cd devel && source setup.sh && cd ../build && make install && cd ../.. && mkdir -p livox_mapping/src && \
     cd livox_mapping/src && \
     git clone https://github.com/Livox-SDK/livox_mapping.git && \
     cd .. && \
@@ -80,6 +82,11 @@ RUN source /opt/ros/melodic/setup.sh && git clone https://github.com/Livox-SDK/l
     cd devel && source setup.bash
     
 RUN apt-get install gedit -y
+RUN apt-get install libceres-dev -y
+RUN apt-get install libsuitesparse-dev
+
+
+
    
 
 
